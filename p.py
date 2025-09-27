@@ -208,7 +208,7 @@ def capture_with_live_preview(cap, duration=2, placeholder=None):
                 # Resize for display
                 display_image = image.copy()
                 display_image.thumbnail((400, 300), Image.Resampling.LANCZOS)
-                placeholder.image(display_image, caption="🔴 RECORDING...", use_container_width=True)
+                placeholder.image(display_image, caption="🔴 RECORDING...", width='stretch')
         
         time.sleep(0.1)  # Capture ~10 frames per second
     
@@ -291,16 +291,16 @@ def main():
             # Resize image to fit better
             img_display = st.session_state.scanned_image.copy()
             img_display.thumbnail((400, 300), Image.Resampling.LANCZOS)
-            camera_placeholder.image(img_display, caption="Last Scan", use_container_width=True)
+            camera_placeholder.image(img_display, caption="Last Scan", width='stretch')
         else:
             placeholder_img = load_placeholder_image()
-            camera_placeholder.image(placeholder_img, caption="Ready to scan", use_container_width=True)
+            camera_placeholder.image(placeholder_img, caption="Ready to scan", width='stretch')
     
     # Middle column - Controls
     with col2:
         st.subheader("🎯 Controls")
         
-        if st.button("🔍 Scan Face", type="primary", use_container_width=True):
+        if st.button("🔍 Scan Face", type="primary", width='stretch'):
             # Create placeholders for countdown
             countdown_placeholder = st.empty()
             
@@ -322,7 +322,7 @@ def main():
                             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                             preview_image = Image.fromarray(frame_rgb)
                             preview_image.thumbnail((400, 300), Image.Resampling.LANCZOS)
-                            camera_placeholder.image(preview_image, caption=f"Get Ready! {i}...", use_container_width=True)
+                            camera_placeholder.image(preview_image, caption=f"Get Ready! {i}...", width='stretch')
                         
                         time.sleep(1)
                     
@@ -339,7 +339,7 @@ def main():
                         st.session_state.characters = []
                         st.session_state.detections = []
                         placeholder_img = load_placeholder_image()
-                        camera_placeholder.image(placeholder_img, caption="Ready to scan", use_container_width=True)
+                        camera_placeholder.image(placeholder_img, caption="Ready to scan", width='stretch')
                     else:
                         with st.spinner("Analyzing faces..."):
                             # Perform face detection
@@ -359,7 +359,7 @@ def main():
                                 # Show final result
                                 final_display = annotated_image.copy()
                                 final_display.thumbnail((400, 300), Image.Resampling.LANCZOS)
-                                camera_placeholder.image(final_display, caption="✨ Scan Complete!", use_container_width=True)
+                                camera_placeholder.image(final_display, caption="✨ Scan Complete!", width='stretch')
                                 
                                 if num_faces == 1:
                                     st.success(f"✨ You are {assigned_characters[0]}!")
@@ -373,7 +373,7 @@ def main():
                                 # Show result even if no face detected
                                 final_display = image.copy()
                                 final_display.thumbnail((400, 300), Image.Resampling.LANCZOS)
-                                camera_placeholder.image(final_display, caption="No faces detected", use_container_width=True)
+                                camera_placeholder.image(final_display, caption="No faces detected", width='stretch')
                                 
                                 st.warning("No faces detected! Try better lighting or positioning.")
                 finally:
@@ -381,13 +381,13 @@ def main():
             
             st.rerun()
         
-        if st.button("🔄 Clear", use_container_width=True):
+        if st.button("🔄 Clear", width='stretch'):
             st.session_state.scanned_image = None
             st.session_state.characters = []
             st.session_state.detections = []
             # Reset camera display
             placeholder_img = load_placeholder_image()
-            camera_placeholder.image(placeholder_img, caption="Ready to scan", use_container_width=True)
+            camera_placeholder.image(placeholder_img, caption="Ready to scan", width='stretch')
             st.rerun()
         
         # Quick stats
