@@ -7,7 +7,6 @@ from PIL import Image, ImageDraw, ImageFont
 import os
 import time
 
-# List of superheroes and villains with descriptions and colors (50 characters)
 characters = {
     # Heroes
     "Superman": {"description": "The Man of Steel - Protector of Metropolis", "color": (0, 0, 255)},
@@ -35,7 +34,32 @@ characters = {
     "Shazam": {"description": "Champion of Magic - Ancient Wizard's Power", "color": (255, 215, 0)},
     "Nightwing": {"description": "Acrobatic Hero - Former Boy Wonder", "color": (0, 0, 139)},
     "Storm": {"description": "Weather Goddess - Mistress of Elements", "color": (255, 255, 255)},
-    
+    "Silver Surfer": {"description": "Cosmic Wanderer - Herald of Galactus", "color": (192, 192, 192)},
+    "She-Hulk": {"description": "Gamma-Powered Lawyer - Green Defender", "color": (0, 128, 0)},
+    "Falcon": {"description": "Winged Avenger - High-Flying Hero", "color": (220, 20, 60)},
+    "War Machine": {"description": "Iron Patriot - Armored Military Hero", "color": (169, 169, 169)},
+    "Vision": {"description": "Synthezoid Avenger - Mind Stone Warrior", "color": (255, 69, 0)},
+    "Scarlet Witch": {"description": "Reality Warper - Chaos Magic User", "color": (178, 34, 34)},
+    "Quicksilver": {"description": "Speedster Mutant - Pietro Maximoff", "color": (135, 206, 250)},
+    "Star-Lord": {"description": "Leader of Guardians - Cosmic Outlaw", "color": (255, 99, 71)},
+    "Gamora": {"description": "Deadliest Woman - Guardian Assassin", "color": (34, 139, 34)},
+    "Drax": {"description": "Destroyer Warrior - Vengeance Seeker", "color": (85, 107, 47)},
+    "Rocket Raccoon": {"description": "Sharp-Shooting Guardian - Tactical Genius", "color": (139, 69, 19)},
+    "Groot": {"description": "Living Tree - Guardian with Three Words", "color": (34, 139, 34)},
+    "Mantis": {"description": "Empathic Guardian - Alien Healer", "color": (173, 255, 47)},
+    "Blade": {"description": "Daywalker - Vampire Hunter", "color": (0, 0, 0)},
+    "Moon Knight": {"description": "Fist of Khonshu - Vigilante Avenger", "color": (255, 255, 255)},
+    "Iron Fist": {"description": "Martial Arts Master - Chi Warrior", "color": (255, 215, 0)},
+    "Luke Cage": {"description": "Hero for Hire - Unbreakable Skin", "color": (184, 134, 11)},
+    "Jessica Jones": {"description": "Private Investigator - Reluctant Hero", "color": (75, 0, 130)},
+    "Ms. Marvel": {"description": "Polymorph Hero - Young Avenger", "color": (255, 105, 180)},
+    "Squirrel Girl": {"description": "Quirky Mutant - Squirrel Army Leader", "color": (210, 105, 30)},
+    "Beast": {"description": "Blue Furry Genius - Mutant Scholar", "color": (0, 0, 255)},
+    "Cyclops": {"description": "Leader of X-Men - Optic Blast Master", "color": (255, 0, 0)},
+    "Jean Grey": {"description": "Omega-Level Psychic - Phoenix Host", "color": (255, 140, 0)},
+    "Colossus": {"description": "Steel-Skinned Mutant - Gentle Giant", "color": (192, 192, 192)},
+    "Iceman": {"description": "Cryokinetic Mutant - Frozen Defender", "color": (135, 206, 235)},
+
     # Villains
     "Joker": {"description": "Clown Prince of Crime - Agent of Chaos", "color": (128, 0, 128)},
     "Loki": {"description": "God of Mischief - Trickster of Asgard", "color": (0, 100, 0)},
@@ -61,8 +85,34 @@ characters = {
     "Deathstroke": {"description": "Super Soldier Assassin - Tactical Terminator", "color": (255, 140, 0)},
     "Reverse Flash": {"description": "Speed Force Nemesis - Timeline Destroyer", "color": (255, 255, 0)},
     "Sinestro": {"description": "Yellow Lantern - Fear's Champion", "color": (255, 215, 0)},
-    "Brainiac": {"description": "Super Intelligence - World Collector", "color": (0, 255, 127)}
+    "Brainiac": {"description": "Super Intelligence - World Collector", "color": (0, 255, 127)},
+    "Apocalypse": {"description": "Ancient Mutant - Survival of the Fittest", "color": (72, 61, 139)},
+    "Sabretooth": {"description": "Ferocious Mutant - Wolverine's Rival", "color": (160, 82, 45)},
+    "Juggernaut": {"description": "Unstoppable Force - Crimson Brute", "color": (178, 34, 34)},
+    "Mystique": {"description": "Shape-Shifter - Deceptive Mutant Spy", "color": (0, 0, 255)},
+    "Emma Frost": {"description": "Telepathic Diamond - Mutant Queen", "color": (255, 255, 255)},
+    "Kingpin": {"description": "Crime Lord - Criminal Overlord of NY", "color": (105, 105, 105)},
+    "Bullseye": {"description": "Deadly Marksman - Daredevil's Foe", "color": (128, 128, 128)},
+    "Dormammu": {"description": "Dark Dimension Overlord - Mystic Threat", "color": (148, 0, 211)},
+    "Mephisto": {"description": "Demonic Lord - Tempter of Souls", "color": (220, 20, 60)},
+    "Kang the Conqueror": {"description": "Time-Traveling Tyrant - Multiverse Threat", "color": (138, 43, 226)},
+    "Galactus": {"description": "Devourer of Worlds - Cosmic Entity", "color": (186, 85, 211)},
+    "Mysterio": {"description": "Master of Illusions - Spider-Man's Foe", "color": (0, 255, 127)},
+    "Sandman": {"description": "Shapeshifting Criminal - Sandy Villain", "color": (210, 180, 140)},
+    "Rhino": {"description": "Armored Brute - Spider-Man's Enemy", "color": (169, 169, 169)},
+    "Shocker": {"description": "Vibro-Shock Villain - Spider-Man's Foe", "color": (255, 215, 0)},
+    "Lizard": {"description": "Reptilian Scientist - Spider-Man's Foe", "color": (34, 139, 34)},
+    "Electro": {"description": "Electric Menace - Power-Driven Villain", "color": (255, 255, 0)},
+    "Vulture": {"description": "Winged Criminal - Elderly Sky Thief", "color": (85, 107, 47)},
+    "Black Cat": {"description": "Feline Thief - Spider-Man's Rival", "color": (0, 0, 0)},
+    "Kraven the Hunter": {"description": "Big Game Stalker - Spider-Man's Nemesis", "color": (139, 69, 19)},
+    "Taskmaster": {"description": "Mimic Fighter - Master of Copy Moves", "color": (128, 128, 128)},
+    "Baron Zemo": {"description": "Master Strategist - Hydra Commander", "color": (128, 0, 0)},
+    "Abomination": {"description": "Gamma Mutant - Hulk's Savage Enemy", "color": (85, 107, 47)},
+    "Mandarin": {"description": "Ten Rings Master - Iron Man's Rival", "color": (0, 128, 0)},
+    "Whiplash": {"description": "Electrified Villain - Iron Man's Foe", "color": (255, 69, 0)}
 }
+
 
 @st.cache_resource
 def load_yolo_model():
